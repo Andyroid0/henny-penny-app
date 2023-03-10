@@ -5,6 +5,7 @@ import useModals from '../../context/useModals'
 import useAppState from '../../context/useAppState'
 import { shallow } from 'zustand/shallow'
 import { RingAnimation } from '../animations/rings'
+import { useRouter } from 'expo-router'
 
 /** # Start Screen
  * 
@@ -13,6 +14,8 @@ import { RingAnimation } from '../animations/rings'
  * @returns 
  */
 const StartScreen = () => {
+
+    const router = useRouter()
 
     const [ setScreenAs ] = useScreens(
         state => [ state.setScreenAs ],
