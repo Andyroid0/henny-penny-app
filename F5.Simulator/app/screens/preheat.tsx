@@ -1,6 +1,7 @@
-import { Image, ImageStyle } from 'react-native'
+import { Image, ImageStyle, View } from 'react-native'
 import useModals from '../../context/useModals'
 import { shallow } from 'zustand/shallow'
+import styles from '../../styles'
 
 /** # Preheat Screen
  * 
@@ -22,11 +23,14 @@ const PreHeatScreen = () => {
     )
 
     return (
-        <Image 
-            source={ require('../../img/screenshots/screens/preheat_screen.png') }
-            style={ style }
-            blurRadius={SimControlModalOpen ? 3 : 0}
-        />
+        <View style={ styles.container }>
+            <Image 
+                source={ require('../../img/screenshots/screens/preheat_screen.png') }
+                style={ style }
+                blurRadius={SimControlModalOpen ? 3 : 0}
+            />
+        </View>
+
     )
 }
 

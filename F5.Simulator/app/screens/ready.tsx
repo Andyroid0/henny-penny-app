@@ -1,11 +1,10 @@
 import { Image, ImageStyle, View } from 'react-native'
-import InvisibleButton from '../components/buttons/InvisibleButton'
-import useScreens from '../context/useScreens'
-import useModals from '../context/useModals'
+import InvisibleButton from '../../components/buttons/InvisibleButton'
+import useScreens from '../../context/useScreens'
+import useModals from '../../context/useModals'
 import { shallow } from 'zustand/shallow'
-import { RingAnimation } from '../components/animations/rings'
-import { useRouter } from 'expo-router'
-import styles from '../styles'
+import { RingAnimation } from '../../components/animations/rings'
+import styles from '../../styles'
 
 /** # Ready Screen
  * 
@@ -14,8 +13,6 @@ import styles from '../styles'
  * @returns 
  */
 const ReadyScreen = () => {
-
-    const router = useRouter()
 
     const [ setScreenAs ] = useScreens(
         state => [ state.setScreenAs ],
@@ -34,11 +31,11 @@ const ReadyScreen = () => {
     }
 
     return (
-        <View style={styles.container} >
+        <View style={ styles.container } >
             <View style={{flex: 1, width: '100%', height: '100%' }}>
 
                 <Image 
-                    source={ require('../img/screenshots/screens/ready_screen.png') }
+                    source={ require('../../img/screenshots/screens/ready_screen.png') }
                     style={ style }
                     blurRadius={SimControlModalOpen ? 3 : 0}
                 />
@@ -56,7 +53,7 @@ const ReadyScreen = () => {
                     // COOK LEFT SIDE
                     style={{width: 120, height: 120, left: 265, top: 135}}
                     //debug
-                    onPress={ () => router.back() }//setScreenAs.selectionLeft() }
+                    onPress={ () => setScreenAs.selectionLeft() }
                     //onLongPress={} select recipe
                 />
                 <InvisibleButton

@@ -9,6 +9,10 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%',
         backgroundColor: 'black'
+    },
+    image_default: {
+        height: '100%',
+        resizeMode: 'contain',        
     }
 
 })

@@ -1,8 +1,10 @@
 import { Image, ImageStyle, View } from 'react-native'
-import InvisibleButton from '../buttons/InvisibleButton'
+import InvisibleButton from '../../components/buttons/InvisibleButton'
 import useScreens from '../../context/useScreens'
 import useModals from '../../context/useModals'
 import { shallow } from 'zustand/shallow'
+import styles from '../../styles'
+
 /** # Choose Food for Preheat Screen
  * 
  * > Returns a food selection screenshot from the f5 simulation app
@@ -26,7 +28,7 @@ const ChooseFoodForPreheatScreen = () => {
     }
 
     return (
-        <View style={{flex: 1, width: '100%', height: '100%' }}>
+        <View style={ styles.container }>
             <Image
                 source={ require('../../img/screenshots/screens/choosefoodforpreheat_screen.png') }
                 style={ style }

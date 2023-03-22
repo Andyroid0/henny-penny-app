@@ -1,26 +1,41 @@
 import Svg, { Circle } from 'react-native-svg'
-import { OpaqueColorValue } from 'react-native'
 import { Percent } from '../../../types/type/Percent'
-import Animated, { useAnimatedProps, useSharedValue, withTiming } from 'react-native-reanimated'
-import { useEffect } from 'react'
+import Animated, { SharedValue, useAnimatedProps, useSharedValue, withTiming } from 'react-native-reanimated'
+import { useEffect, useState } from 'react'
+import { ColorValue, View } from 'react-native'
 
 interface ProgressCircleProps {
 
-    backgroundColor?: OpaqueColorValue
+    backgroundColor?: ColorValue
     backgroundStrokeWidth?: number
-    color?: OpaqueColorValue
+    color?: ColorValue
     strokeWidth?: number
     width: Percent
     height: Percent
+    progress?: number
+    variant?: 'dictated' | 'once' | 'looped' 
 }
 
 export const ProgressCircle = ({ 
     backgroundColor, 
-    backgroundStrokeWidth, 
+    backgroundStrokeWidth,
     color, 
     strokeWidth, 
     width, 
-    height }: ProgressCircleProps) => {
+    height,
+    progress,
+    variant }: ProgressCircleProps) => {
+
+
+    const initProgress = () => (
+
+        Variant === 'dictated'
+        ? useSharedValue( progress )
+        : useSharedValue( 0 )
+    )
+
+
+    const [Progress, setProgress] = useState<SharedValue<number>>(initProgress())
 
 
     const AnimatedCircle = Animated.createAnimatedComponent(Circle)
@@ -37,7 +52,7 @@ export const ProgressCircle = ({
 
     const Radius = Length / ( 2 * Math.PI )
 
-    const Progress = useSharedValue(0)
+    const Variant = variant || 'once'
 
     const AnimatedProps = useAnimatedProps( () => ({
         
@@ -46,28 +61,33 @@ export const ProgressCircle = ({
 
     useEffect( () => {
 
-        Progress.value = withTiming( 1, { duration: 2000 } )
+        if ( Variant === 'once' ) {
+
+            Progress.value = withTiming( 1, { duration: 2000 } )
+        }
+        
     }, [])
 
 
     return (
-        <Svg>
-            <Circle 
-                cx={ width } 
-                cy={ height } 
-                r={ Radius }
-                stroke={ BackgroundColor }
-                strokeWidth={ BackgroundStrokeWidth }
-            />
-            <AnimatedCircle 
-                cx={ width } 
-                cy={ height } 
-                r={ Radius }
-                stroke={ Color }
-                strokeWidth={ StrokeWidth }
-                strokeDasharray={ Length }
-                animatedProps={AnimatedProps}
-            />
-        </Svg>
+            <Svg style={{left: '20%'}} >
+                <Circle 
+                    cx={ width } 
+                    cy={ height } 
+                    r={ Radius }
+                    stroke={ BackgroundColor }
+                    strokeWidth={ BackgroundStrokeWidth }
+                />
+                <AnimatedCircle 
+                    cx={ width } 
+                    cy={ height } 
+                    r={ Radius }
+                    stroke={ Color }
+                    strokeWidth={ StrokeWidth }
+                    strokeDasharray={ Length }
+                    animatedProps={AnimatedProps}
+                    strokeLinecap='round'
+                />
+            </Svg>
     )
 }

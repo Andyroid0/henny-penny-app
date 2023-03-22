@@ -1,9 +1,12 @@
 import { Image, ImageStyle, View } from 'react-native'
-import InvisibleButton from '../buttons/InvisibleButton'
+import InvisibleButton from '../../components/buttons/InvisibleButton'
 import useScreens from '../../context/useScreens'
 import useModals from '../../context/useModals'
+import { useRouter } from 'expo-router'
 import useAppState from '../../context/useAppState'
 import { shallow } from 'zustand/shallow'
+import styles from '../../styles'
+
 
 /** # Is Vat Full Screen
  * 
@@ -13,8 +16,10 @@ import { shallow } from 'zustand/shallow'
  */
 const IsVatFullScreen = () => {
 
-    const [ setScreenAs ] = useScreens(
-        state => [ state.setScreenAs ],
+    const router = useRouter()
+
+    const [ setScreenAs, previousScreen ] = useScreens(
+        state => [ state.setScreenAs, state.previousScreen ],
         shallow
     )
     const [ SimControlModalOpen ] = useModals(
@@ -44,7 +49,7 @@ const IsVatFullScreen = () => {
     }
 
     return (
-        <View style={{flex: 1, width: '100%', height: '100%' }}>
+        <View style={ styles.container }>
             <Image
                 source={ require('../../img/screenshots/screens/isvatfull_screen.png') }
                 style={ style }
@@ -55,8 +60,9 @@ const IsVatFullScreen = () => {
             // DISMISS BUTTON
                 style={{width: 60, height: 60, right: 50, top: 0}}
                 //debug
-                onPress={ () => setScreenAs.start() }
+                onPress={ () => router.back() }
                 //onLongPress={} select recipe
+                
             />
             <InvisibleButton
                 // YES BUTTON

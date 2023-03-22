@@ -1,9 +1,10 @@
-import { Image, ImageStyle, View } from 'react-native'
-import InvisibleButton from '../buttons/InvisibleButton'
+import { Image, ImageStyle, Text, View } from 'react-native'
+import InvisibleButton from '../../components/buttons/InvisibleButton'
 import useScreens from '../../context/useScreens'
 import useModals from '../../context/useModals'
 import useAppState from '../../context/useAppState'
 import { shallow } from 'zustand/shallow'
+import styles from '../../styles'
 
 /** # Cooking on left side Screen
  * 
@@ -33,7 +34,8 @@ const CookingLeftSideScreen = () => {
 
 
     return (
-        <View style={{flex: 1, width: '100%', height: '100%' }}>
+        <View style={ styles.container }>
+            <Text>Frank leo</Text>
             <Image
                 source={ require('../../img/screenshots/screens/cooking_leftside_screen.png') }
                 style={ style }
